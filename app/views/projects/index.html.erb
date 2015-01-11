@@ -1,0 +1,60 @@
+
+<div class="container">
+    <div class="row">
+        <h1>Simple TODO lists</h1>
+        <div class="col-md-7">
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;User
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;Settings</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-share"></span>&nbsp;Log out</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <% if @projects.any? %>
+                <% @projects.each do |project| %>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <span class="calendar glyphicon glyphicon-calendar"></span><%= project.name %>
+                            <div class="pull-right action-buttons">
+                                 <a href="#" class="pencil"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="#" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-inline add-task" role="form" >
+                               <div class="form-group">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <input type="text" class="form-control" placeholder="Start typing here to create a task">
+                                        <button type="submit" class="btn btn-success">Add Task</button>
+                                </div>
+                            </form>
+                            <ul class="list-group">
+                                <% if project.tasks.any? %>
+                                    <% project.tasks.each do |task| %>
+                                        <li class="list-group-item">
+                                            <div class="checkbox">
+                                                <input type="checkbox"/>
+                                                <label for="checkbox">
+                                                    <%= task.name %>
+                                                </label>
+                                            </div>
+                                            <div class="pull-right action-buttons">
+                                                <a href="#" class="pencil"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <a href="#" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+                                            </div>
+                                        </li>
+                                    <% end %>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
