@@ -1,0 +1,7 @@
+<%= form_for(@project, html: {class: "navbar-form navbar-left"}, remote: true) do |f| %>
+  <div class="form-group navbar-form navbar-left">
+    	<span class="glyphicon glyphicon-plus"></span>
+      <%= f.text_field :name, class: "form-control", placeholder: "Description of the project", :minlength => 4 %>
+      <%= f.submit "Add project", class: "btn btn-primary" %>
+  </div>
+<% end %>

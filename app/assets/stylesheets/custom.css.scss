@@ -21,20 +21,50 @@ h1 {
 .calendar {color: #c0a7c2; }
 .trash { color: #d42e15; }
 .pencil {color: #d4ca15; }
-.panel {margin-top: 20px;}
+.panel { margin-top: 20px;}
 .panel-body { padding:0px; }
 .panel .glyphicon, .list-group-item .glyphicon { margin-right:5px; }
 .panel-body .radio, .checkbox { display:inline-block;margin:0px; }
 .list-group input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
 .list-group { margin-bottom:0px; }
-.add-task {margin: 10px;}
+.form-inline {margin: 10px;}
 .form-inline .form-group { width: 100%; }
-.form-inline .form-control { width: 82%;}
+.form-inline .form-control { width: 75%;}
 .list-group-item {padding-left: 30px;}
 .dropdown{
 	float: right;
 }
+.add-todo-list{
+	position: relative;
+  float: left;
+  left: 50%;
+}
+.add-lists{
+	margin:20px auto 60px;
+	position: relative;
+  float: right;
+  right: 50%;
+}
 .clear {
 	clear: both;
 }
+#new_project{
+	position: relative;
+  float: left;
+  left: 50%;
+}
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+/*.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    border-color: red;
+  }
+}*/
