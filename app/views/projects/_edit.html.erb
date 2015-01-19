@@ -1,0 +1,7 @@
+<%= form_for(@project, html: {class: "form-inline"}, remote: true) do |f| %>
+  <div class="form-group">
+    	<span class="glyphicon glyphicon-plus"></span>
+      <%= f.text_field :name, class: "form-control", placeholder: "Description of the project", :minlength => 4 %>
+      <%= f.submit "Update project", class: "btn btn-success" %>
+  </div>
+<% end %>

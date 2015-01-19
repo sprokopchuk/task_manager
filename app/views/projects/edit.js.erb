@@ -1,0 +1,9 @@
+$("div[data-project_id=<%= j(@project.id.to_s) %>]").wrapInner('<div class="hide"></div>');
+$("div[data-project_id=<%= j(@project.id.to_s) %>]").append("<%= j(render 'edit') %>");
+
+
+
+
+
+
+

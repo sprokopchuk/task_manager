@@ -1,6 +1,12 @@
-<span class="calendar glyphicon glyphicon-calendar"></span>
-	<%= project.name %>
-<div class="pull-right action-buttons">
-  <a href="#" class="pencil"><span class="glyphicon glyphicon-pencil"></span></a>
-  <a href="#" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+<div class="pull-left calendar glyphicon glyphicon-calendar"></div>
+<div class="pull-left"><%= project.name %></div>
+<div class="pull-right">
+  <%= link_to edit_project_path(project), class: "pencil", remote: true do %>
+		<span class="glyphicon glyphicon-pencil"></span>
+  <% end %>
+  <%= link_to project, method: :delete, data: { confirm: "Project and dependent tasks will be destroyed. Are you sure?"}, class: "trash", remote: true do %>
+  	<span class="glyphicon glyphicon-trash"></span>
+  <% end %>
 </div>
+<div class="clear"></div>
+

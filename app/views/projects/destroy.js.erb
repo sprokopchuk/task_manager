@@ -1,0 +1,11 @@
+var parent = $("div[data-project_id=<%= j(@project.id.to_s) %>]").parent();
+<% flash.each do |message_type, message| %>
+  var msg = $("<div class=\"alert alert-<%= message_type %>\"><%= message %></div>");
+  msg.insertBefore(parent);
+  msg.hide(2000, function(){
+  	$(this).remove();
+  });
+<% end %>
+parent.hide(500, function(){
+  $(this).remove();
+});

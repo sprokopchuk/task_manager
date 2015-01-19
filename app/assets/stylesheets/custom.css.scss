@@ -25,12 +25,15 @@ h1 {
 .panel-body { padding:0px; }
 .panel .glyphicon, .list-group-item .glyphicon { margin-right:5px; }
 .panel-body .radio, .checkbox { display:inline-block;margin:0px; }
+.checkbox{
+	width: 75%;
+}
 .list-group input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
 .list-group { margin-bottom:0px; }
 .form-inline {margin: 10px;}
 .form-inline .form-group { width: 100%; }
-.form-inline .form-control { width: 75%;}
+.form-inline .form-control { width: 50%;}
 .list-group-item {padding-left: 30px;}
 .dropdown{
 	float: right;
@@ -54,6 +57,16 @@ h1 {
   float: left;
   left: 50%;
 }
+.error {
+  border-color: red;
+ }
+.panel-heading .form-inline {margin: 0px;}
+.panel-heading .form-inline .form-control { width: 75%;}
+
+.form-inline input[name*=deadline] {
+	width: 25%;
+}
+
 #error_explanation {
   color: red;
   ul {
@@ -62,9 +75,9 @@ h1 {
   }
 }
 
-/*.field_with_errors {
+.field_with_errors {
   @extend .has-error;
   .form-control {
-    border-color: red;
+    color: red;
   }
-}*/
+}

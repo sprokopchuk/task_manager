@@ -12,27 +12,11 @@
 <div class="clear"></div>
 <% if @projects.any? %>
     <% @projects.each do |project| %>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <%= render 'show', :project => project %>
-            </div>
-            <div class="panel-body">
-              <%= render 'tasks/task_form', :project_id => project.id %>
-                <ul class="list-group">
-                    <% if project.tasks.any? %>
-                        <% project.tasks.each do |task| %>
-                            <li class="list-group-item">
-                                <%= render 'tasks/show', :task => task %>
-                            </li>
-                        <% end %>
-                    <% end %>
-                </ul>
-            </div>
-        </div>
+       <%= render 'shared/project_tasks', :project => project %>
     <% end %>
 <% end %>
 <div class="add-lists">
-    <%= button_to new_project_path, method: :get, class: "btn btn-primary add-todo-list", remote:true do %>
-    <span class="glyphicon glyphicon-plus">&nbsp;Add TODO List
+    <%= button_to new_project_path, method: :get, class: "btn btn-primary add-todo-list", remote: true do %>
+        <span class="glyphicon glyphicon-plus">&nbsp;Add TODO List
     <% end %>
 </div>

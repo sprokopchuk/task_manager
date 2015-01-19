@@ -1,10 +1,14 @@
-<div class="checkbox">
+<div class="checkbox" data-task_id="<%= task.id %>" >
 	<input type="checkbox"/>
 	<label for="checkbox">
 	    <%= task.name %>
 	</label>
 </div>
 <div class="pull-right action-buttons">
-  <a href="#" class="pencil"><span class="glyphicon glyphicon-pencil"></span></a>
-  <a href="#" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+  <%=  link_to edit_task_path(task), class: "pencil", remote: true do %>
+  	<span class="glyphicon glyphicon-pencil"></span>
+  <% end %>
+  <%= link_to task, method: :delete, class: "trash", remote: true do %>
+  	<span class="glyphicon glyphicon-trash"></span>
+  <% end %>
 </div>

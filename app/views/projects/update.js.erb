@@ -1,4 +1,4 @@
-var parent = $(".add-lists");
+var parent = $("div[data-project_id=<%= j(@project.id.to_s) %>]").parent();
 var msg;
 <% if @project.errors.any? %>
 	msg = $("<%= j(render 'shared/error_messages', :object => @project) %>");
@@ -14,7 +14,5 @@ var msg;
 	  	$(this).remove();
 	  });
 	<% end %>
-	$("<%= j(render 'shared/project_tasks', :project => @project) %>").insertBefore(parent);
-	$(".add-lists #new_project").remove();
-	$(".add-lists form").show();
+	$("div[data-project_id=<%= j(@project.id.to_s) %>]").html("<%= j(render 'show', :project => @project) %>");
 <% end %>
