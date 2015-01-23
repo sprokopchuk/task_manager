@@ -1,0 +1,3 @@
+<div class="badge <% if task.priority == 2 %>badge-warning<% elsif task.priority == 3 %>badge-danger<% end %>" data-toggle="tooltip" data-placement="top" title="<%= task.priorities[task.priority] %> priority">
+	<%= task.priority %>
+</div>

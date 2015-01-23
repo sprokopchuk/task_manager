@@ -19,14 +19,23 @@ h1 {
 	margin-left: 20%;
 }
 .calendar {color: #c0a7c2; }
-.trash { color: #d42e15; }
-.pencil {color: #d4ca15; }
+.trash { 
+	color: #d42e15; 
+	vertical-align: middle;
+ }
+.pencil {
+	color: #d4ca15;
+	vertical-align: middle;
+ }
 .panel { margin-top: 20px;}
 .panel-body { padding:0px; }
 .panel .glyphicon, .list-group-item .glyphicon { margin-right:5px; }
 .panel-body .radio, .checkbox { display:inline-block;margin:0px; }
 .checkbox{
-	width: 75%;
+	width: 100%;
+}
+.list-group-item form{
+	margin: 0px -20px;
 }
 .list-group input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
@@ -81,3 +90,42 @@ h1 {
     color: red;
   }
 }
+.action-button{
+	display: none;
+	width: 15%;
+}
+
+.glyphicon-chevron-up, .glyphicon-chevron-down {
+	margin-right: 0px; 
+	padding-left: 5px;
+	}
+
+.btn-group-priority {
+	margin: 0 10px;
+  line-height: 0.5;
+
+}
+.badge{
+	margin-left: 10px;
+}
+.btn-group-priority button {
+  padding: 1px 1px;
+  font-size: 6px;
+}
+
+.badge-danger {
+  background-color: #b94a48;
+}
+.badge-danger:hover {
+  background-color: #953b39;
+}
+.badge-warning {
+  background-color: #f89406;
+}
+.badge-warning:hover {
+  background-color: #c67605;
+}
+.deadline{
+	margin-left: 15px;
+}
+

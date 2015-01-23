@@ -1,22 +1,16 @@
 class Task < ActiveRecord::Base
 	
+	default_scope { order('created_at') } 
 	attr_reader :priorities
 
 	belongs_to :projects
 	validates :name, presence: true, length: { minimum: 4 }
-	validates :priority, inclusion: { :in => 0..2 }
+	validates :priority, inclusion: { :in => 1..3 }
 	validates :project_id, presence: true
+	validates :deadline, timeliness: {:type => :date}, :allow_blank => true
 
 	def priorities
-		["Normal", "High", "Maximum"]
+		[nil, "Normal", "High", "Maximum"]
 	end
-
-## Controllers methods
-	#def up_priority				
-
-	#end
-
-	#def down_priority
-	#end
 
 end

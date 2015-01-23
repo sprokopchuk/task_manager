@@ -1,14 +1,25 @@
 <div class="checkbox" data-task_id="<%= task.id %>" >
-	<input type="checkbox"/>
-	<label for="checkbox">
-	    <%= task.name %>
-	</label>
-</div>
-<div class="pull-right action-buttons">
-  <%=  link_to edit_task_path(task), class: "pencil", remote: true do %>
-  	<span class="glyphicon glyphicon-pencil"></span>
+	<%= check_box_tag "task_id_#{task.id}", task.done, task.done? %>
+	<%= label_tag "task_id_#{task.id}" do %>
+    <%= task.name %>
   <% end %>
-  <%= link_to task, method: :delete, class: "trash", remote: true do %>
-  	<span class="glyphicon glyphicon-trash"></span>
-  <% end %>
+  <%= render 'tasks/priority', :task => task %>
+  <span class="label label-primary deadline"><%= task.deadline.strftime('%d/%m/%Y') unless task.deadline.blank? %></span>
+  <div class="pull-right action-button">
+    <div class="btn-group-vertical btn-group-priority" role="group">
+      <button class="btn btn-default" value="up">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </button>
+      <button class="btn btn-default" value="down">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </button>
+    </div>
+    <%=  link_to edit_task_path(task), class: "pencil", remote: true do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <% end %>
+    <%= link_to task, method: :delete, data: { confirm: "You wanna delete task?"}, class: "trash", remote: true do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <% end %>
+  </div>
 </div>
+

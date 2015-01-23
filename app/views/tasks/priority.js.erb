@@ -1,0 +1,1 @@
+$("div[data-task_id=<%= @task.id %>]").find(".badge").replaceWith("<%=  j(render 'priority', :task => @task ) %>");

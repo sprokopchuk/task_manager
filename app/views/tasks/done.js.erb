@@ -1,0 +1,6 @@
+var done_task = $("div[data-task_id=<%= @task.id %>] input[type=checkbox]");
+<% if @task.done? %>
+	done_task.prop('checked', true);
+<% else %>
+	done_task.prop('checked', false);
+<% end %>

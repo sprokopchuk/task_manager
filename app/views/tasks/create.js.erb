@@ -1,22 +1,18 @@
-var project = $("div[data-project_id=<%= j(@task.project_id.to_s) %>]");
+var elm = $("div[data-project_id=<%= j(@task.project_id.to_s) %>]");
 var msg;
 <% if @task.errors.any? %>
 	msg = $("<%= j(render 'shared/error_messages', :object => @task) %>");
-	msg.insertBefore(project.parent());
+	msg.insertBefore(elm.parent());
   msg.hide(5000, function(){
   	$(this).remove();
   });	
 <% else %>
 	<% flash.each do |message_type, message| %>
 	  msg = $("<div class=\"alert alert-<%= message_type %>\"><%= message %></div>");
-	  msg.insertBefore(project.parent());
+	  msg.insertBefore(elm.parent());
 	  msg.hide(1500, function(){
 	  	$(this).remove();
 	  });
 	<% end %>
-	var task = project.next().find("div[data-task_id=<%= j(@task.id.to_s) %>]");
-	task.html("<%= j(render 'show', :task => @task) %>");
-	task.removeClass("hide");
-	task.next().remove();
+	$(elm.next().find(".list-group")).append("<li class=\"list-group-item\"><%= j(render 'show', :task => @task) %></li>");
 <% end %>
-

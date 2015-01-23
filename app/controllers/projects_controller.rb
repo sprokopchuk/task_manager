@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 		@project = Project.create(project_params)
 
   	if @project.save
-      flash[:info] = "Project created!"
+      flash.now[:info] = "Project created!"
     end
 	end
 
@@ -27,14 +27,14 @@ class ProjectsController < ApplicationController
 	def update
 		@project = Project.find(params[:id])
 		if @project.update_attributes(project_params) 
-      flash[:success] = "Project updated!"
+      flash.now[:success] = "Project updated!"
     end
 	end
 
 	def destroy
 		@project = Project.find(params[:id])
 		if @project.destroy
-			flash[:success] = "Project and dependent tasks are destroyed!"
+			flash.now[:success] = "Project and dependent tasks are destroyed!"
 		end
 	end
 

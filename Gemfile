@@ -17,6 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
+# Validation date
+gem 'jc-validates_timeliness'
 #gem 'client_side_validations' //Conflict with ruby on rails: Wrong number of arguments in form_for
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
