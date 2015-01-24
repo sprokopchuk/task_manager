@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :project do
-    string ""
+    name "This is my first project"
   end
 
 end
