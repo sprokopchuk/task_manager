@@ -41,10 +41,10 @@ feature 'Project management', js: true do
 		
 		background do
 			@project = FactoryGirl.create(:project)
-			visit root_path
 		end
 
 		scenario "with invalid blank name" do 
+			visit root_path
 			get_edit_form(@project)
 			fill_in "project[name]", with: ""
 			click_button "Update project"
@@ -52,6 +52,7 @@ feature 'Project management', js: true do
 		end
 		
 		scenario "with too short name" do 
+			visit root_path
 			get_edit_form(@project)
 			fill_in "project[name]", with: "a"*3
 			click_button "Update project"
@@ -59,12 +60,22 @@ feature 'Project management', js: true do
 		end
 		
 		scenario 'with valid information' do 
+			visit root_path
 			get_edit_form(@project)
 			fill_in "project[name]", with: "Project with new name"
 			click_button "Update project"
 			wait_for_ajax
 			expect(page).to have_content("Project updated!")
 			expect(page).to have_content("Project with new name")	
+		end
+
+		scenario "when created two projects" do
+			@other_project = FactoryGirl.create(:project, :name => "This is my second project")
+			visit root_path
+			get_edit_form(@project)
+			get_edit_form(@other_project)
+			expect(page).not_to have_field("project[name]", :with => @project.name)
+			expect(page).to have_field("project[name]", :with => @other_project.name)
 		end
 
 	end
