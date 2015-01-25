@@ -11,21 +11,22 @@ feature 'Project management', js: true do
 			wait_for_ajax
 		end
 
-		scenario "with invalid blank name" do
+		scenario "where field for project name is present" do
 			expect(page).to have_field("project[name]")
+		end
+
+		scenario "with invalid blank name" do
 			expect{click_button "Add project"}.not_to change{Project.count}	
 			expect(page).to have_content("This field is required.")
 		end
 
 		scenario "with too short name" do
-			expect(page).to have_field("project[name]")
 			fill_in "project[name]", with: "a"*3
 			expect{click_button "Add project"}.not_to change{Project.count}	
 			expect(page).to have_content("Please enter at least 4 characters.")
 		end		
 
 		scenario 'with valid information' do
-			expect(page).to have_field("project[name]")
 			fill_in "project[name]", with: "This is my first project"
 			expect{			
 				click_button "Add project"
@@ -43,9 +44,9 @@ feature 'Project management', js: true do
 			@project = FactoryGirl.create(:project)
 		end
 
-		scenario "with invalid blank name" do 
+		scenario "with blank name" do 
 			visit root_path
-			get_edit_form(@project)
+			get_edit_form_for_project(@project)
 			fill_in "project[name]", with: ""
 			click_button "Update project"
 			expect(page).to have_content("This field is required.")	
@@ -53,7 +54,7 @@ feature 'Project management', js: true do
 		
 		scenario "with too short name" do 
 			visit root_path
-			get_edit_form(@project)
+			get_edit_form_for_project(@project)
 			fill_in "project[name]", with: "a"*3
 			click_button "Update project"
 			expect(page).to have_content("Please enter at least 4 characters.")	
@@ -61,7 +62,7 @@ feature 'Project management', js: true do
 		
 		scenario 'with valid information' do 
 			visit root_path
-			get_edit_form(@project)
+			get_edit_form_for_project(@project)
 			fill_in "project[name]", with: "Project with new name"
 			click_button "Update project"
 			wait_for_ajax
@@ -72,10 +73,13 @@ feature 'Project management', js: true do
 		scenario "when created two projects" do
 			@other_project = FactoryGirl.create(:project, :name => "This is my second project")
 			visit root_path
-			get_edit_form(@project)
-			get_edit_form(@other_project)
+			get_edit_form_for_project(@project)
+			get_edit_form_for_project(@other_project)
 			expect(page).not_to have_field("project[name]", :with => @project.name)
 			expect(page).to have_field("project[name]", :with => @other_project.name)
+		end
+
+		scenario "when form for editing show project must be hidden" do 
 		end
 
 	end

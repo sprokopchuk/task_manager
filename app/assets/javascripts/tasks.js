@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	
-	$(".badge").tooltip();
-	$(".deadline").tooltip();
+
 	$("form[id^=for_project_id]").each(function(){
 		
 		$(this).bind("ajax:success", function(){
@@ -17,7 +16,7 @@ $(document).ready(function(){
 	});
 	
 	$("input[name='task[deadline]']").each(function(){
-		$(this).rules("add", {required: false, date: true } )
+		$(this).rules("add", {required: false, dateITA: true } )
 	});
 
 
@@ -33,17 +32,20 @@ $(document).ready(function(){
 		$(".list-group-item > form").validate({
 			rules: {
 				"task[name]": 		{required: true, minlength: 4},
-				"task[deadline]": {required: false, date: true },
+				"task[deadline]": {required: false, dateITA: true },
 			}
 		});
 	});
 
 	$(".list-group").on("mouseenter", ".list-group-item", function(){
-		$(this).find(".action-button").css("display", "block");
+		$(".badge").tooltip();
+		$(".deadline").tooltip();
+		$(this).find(".action-button").css("visibility", "visible");
+
 	});
 
 	$(".list-group").on("mouseleave", ".list-group-item", function(){
-		$(this).find(".action-button").css("display", "none");
+		$(this).find(".action-button").css("visibility", "hidden");
 	});	
 
 	$("input[id^=task_id]").bind('change', function(){

@@ -1,15 +1,11 @@
-require 'rails_helper'
-
-# Specs in this file have access to a helper object that includes
-# the TasksHelper. For example:
-#
-# describe TasksHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe TasksHelper, :type => :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+def get_edit_form_for_task(task)
+	expect(page).to have_content(task.name)
+	div_task = page.find("div[data-task_id=\"#{task.id}\"]")
+	div_task.hover
+	div_task.find("a[href=\"#{edit_task_path(task)}\"]").click
+	wait_for_ajax
+	expect(page).to have_field("task[name]", :with => task.name) 
 end
+
+
+
