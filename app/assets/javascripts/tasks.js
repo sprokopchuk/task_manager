@@ -14,9 +14,13 @@ $(document).ready(function(){
 	$("input[name='task[name]']").each(function(){
 		$(this).rules("add", {required: true, minlength: 4} )
 	});
-	
+
+	$(".panel-body").on("mouseenter", "input[name='task[deadline]']", function(){
+		$(this).datetimepicker({format: "YYYY-MM-DD"});
+	});
+
 	$("input[name='task[deadline]']").each(function(){
-		$(this).rules("add", {required: false, dateITA: true } )
+		$(this).rules("add", {required: false, date: true } )
 	});
 
 
@@ -32,9 +36,10 @@ $(document).ready(function(){
 		$(".list-group-item > form").validate({
 			rules: {
 				"task[name]": 		{required: true, minlength: 4},
-				"task[deadline]": {required: false, dateITA: true },
+				"task[deadline]": {required: false, date: true },
 			}
 		});
+
 	});
 
 	$(".list-group").on("mouseenter", ".list-group-item", function(){

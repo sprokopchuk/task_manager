@@ -4,7 +4,7 @@
     <%= task.name %>
   <% end %>
   <%= render 'tasks/priority', :task => task %>
-  <span class="label label-danger deadline" data-toggle="tooltip" data-placement="right" title="Deadline"><%= task.deadline.strftime('%d/%m/%Y') unless task.deadline.blank? %></span>
+  <span class="label label-danger deadline" data-toggle="tooltip" data-placement="right" title="Deadline"><%= task.deadline.strftime('%d-%m-%Y') unless task.deadline.blank? %></span>
   <div class="pull-right action-button">
     <div class="btn-group-vertical btn-group-priority" role="group">
       <button class="btn btn-default" value="up">

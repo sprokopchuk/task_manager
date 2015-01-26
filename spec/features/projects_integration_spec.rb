@@ -44,6 +44,12 @@ feature 'Project management', js: true do
 			@project = FactoryGirl.create(:project)
 		end
 
+		scenario "when form for editing show project must be hidden" do 
+			visit root_path
+			get_edit_form_for_project(@project)
+			expect(page.find("div[data-project_id=\"#{@project.id}\"] .hide", visible: false).visible?).to be_falsey 
+		end
+
 		scenario "with blank name" do 
 			visit root_path
 			get_edit_form_for_project(@project)
@@ -57,7 +63,7 @@ feature 'Project management', js: true do
 			get_edit_form_for_project(@project)
 			fill_in "project[name]", with: "a"*3
 			click_button "Update project"
-			expect(page).to have_content("Please enter at least 4 characters.")	
+			expect(page).to have_content("Please enter at least 4 characters")	
 		end
 		
 		scenario 'with valid information' do 
@@ -79,8 +85,7 @@ feature 'Project management', js: true do
 			expect(page).to have_field("project[name]", :with => @other_project.name)
 		end
 
-		scenario "when form for editing show project must be hidden" do 
-		end
+
 
 	end
 

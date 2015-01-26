@@ -8,7 +8,7 @@ feature 'Task management', js: true do
 	end
 
 	feature "adds a new task" do
-=begin
+
   	scenario "where fields for task name and deadline are present" do
   		visit root_path
   		expect(page).to have_field("task[name]")
@@ -33,7 +33,7 @@ feature 'Task management', js: true do
   		fill_in "task[name]" ,		with: "Buy a milk"
   		fill_in "task[deadline]", with: "a"*5
   		expect{click_button "Add Task"}.not_to change{Task.count}
-  		expect(page).to have_content("Please enter a correct date.")
+  		expect(page).to have_content("Please enter a valid date.")
   	end
 
   	scenario "with valid name and without deadline" do
@@ -48,11 +48,11 @@ feature 'Task management', js: true do
   			expect(page.find('div[title="Normal priority"]').text).to eq("1")
   			expect(page.has_css?('div[title="Deadline"]')).to be_falsey
   	end
-=end
-  	scenario "with valid name and deadline" do #Must be solve a problem with the validataion fomat date: %d/%m/%Y
+
+  	scenario "with valid name and deadline" do
 			visit root_path
   		fill_in "task[name]", 		with: "Buy a dog"
-  		fill_in "task[deadline]", with: "3/12/2015"
+  		fill_in "task[deadline]", with: "2015-12-30"
   		expect{
   			click_button "Add Task"
   			wait_for_ajax
@@ -60,10 +60,9 @@ feature 'Task management', js: true do
   			expect(page).to have_content("Task is created!")
   			expect(page).to have_content("Buy a dog")
   			expect(page.find('div[title="Normal priority"]').text).to eq("1")
-  			save_and_open_page
-  			expect(page.find('div[title="Deadline"]').text).to eq("3/12/2015")			
+  			expect(page.find('span[title="Deadline"]').text).to eq("30-12-2015")			
   	end
-=begin
+
   	scenario "when to hover task and show for actions: edit, delete and prioritise" do
   		@task = FactoryGirl.create(:task, :project_id => @project.id)
 			visit root_path
@@ -71,9 +70,9 @@ feature 'Task management', js: true do
 			page.find("div[data-task_id=\"#{@task.id}\"]").hover
 			expect(page.find("div[data-task_id=\"#{@task.id}\"] div.action-button").visible?).to be_truthy 
   	end
-=end
+
 	end
-=begin
+
 	feature "edit the task" do
 
 		background do
@@ -108,7 +107,7 @@ feature 'Task management', js: true do
 			fill_in "task_name", 		 with: "Buy some water"
 			fill_in "task_deadline", with: "a"*5
 			click_button "Update Task"
-			expect(page).to have_content("Please enter a correct date")
+			expect(page).to have_content("Please enter a valid date")
 		end
 
 		scenario "with valid name and without deadline" do
@@ -122,9 +121,17 @@ feature 'Task management', js: true do
 		end
 
 		scenario "with valid name and deadline" do #must be solve the problem with te date format %d/%m/%Y
-
+			visit root_path
+			get_edit_form_for_task(@task)
+  		fill_in "task_name", 		with: "Buy Birthday Flowers for Mom"
+  		fill_in "task_deadline", with: "2015-05-25"
+  		click_button "Update Task"
+  		wait_for_ajax
+			expect(page).to have_content("Task is updated!")
+  		expect(page).to have_content("Buy Birthday Flowers for Mom")
+  		expect(page.find('span[title="Deadline"]').text).to eq("25-05-2015")			
 		end
-		
+	
 		scenario "when created two tasks" do
 			@other_task = FactoryGirl.create(:task, :name => "The second task", :project_id => @project.id)
 			visit root_path
@@ -257,5 +264,5 @@ feature 'Task management', js: true do
 		end				
 
 	end
-=end
+
 end

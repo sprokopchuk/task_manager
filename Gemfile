@@ -20,6 +20,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # Validation date
 gem 'jc-validates_timeliness'
 #gem 'client_side_validations' //Conflict with ruby on rails: Wrong number of arguments in form_for
+#Bootstrap DatePicker 
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
