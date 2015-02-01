@@ -1,0 +1,13 @@
+$("#ajax-modal").modal().fadeOut();
+<% flash.each do |message_type, message| %>
+	$("<div class=\"alert alert-<%= message_type %>\"><%= message %></div>").insertBefore(".nav").hide(3000, function(){
+		$(this).remove();
+	});
+<% end %>
+$("<%= j(render 'shared/nav_for_users') %><div class=\"clear\"></div>").insertBefore(".nav");
+$(".nav").remove();
+<% if current_user.projects.any? %>
+  <% current_user.projects.each do |project| %>
+	$("<%= j(render 'shared/project_tasks', :project => project) %>").insertBefore(".add-lists");
+  <% end %>
+<% end %>

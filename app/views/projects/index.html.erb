@@ -1,22 +1,17 @@
-<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-        <span class="glyphicon glyphicon-user"></span>&nbsp;User
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;Settings</a></li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-share"></span>&nbsp;Log out</a></li>
-    </ul>
-</div>
-<div class="clear"></div>
-<% if @projects.any? %>
-    <% @projects.each do |project| %>
-       <%= render 'shared/project_tasks', :project => project %>
-    <% end %>
+<% if user_signed_in? %>
+  <%= render 'shared/nav_for_users' %>
+  <div class="clear"></div>
+  <% if current_user.projects.any? %>
+      <% current_user.projects.each do |project| %>
+         <%= render 'shared/project_tasks', :project => project %>
+      <% end %>
+  <% end %>
+<% else %>
+  <%= render 'shared/nav_for_not_users' %>
+  <div class="clear"></div>
 <% end %>
 <div class="add-lists">
-    <%= button_to new_project_path, method: :get, class: "btn btn-primary add-todo-list", remote: true do %>
-        <span class="glyphicon glyphicon-plus">&nbsp;Add TODO List
-    <% end %>
+  <%= button_to new_project_path, method: :get, class: "btn btn-primary add-todo-list", remote: true do %>
+    <span class="glyphicon glyphicon-plus">&nbsp;Add TODO List
+  <% end %>
 </div>

@@ -1,7 +1,10 @@
 class ProjectsController < ApplicationController
 
-	before_action :new_task, only: [:index, :create]
+	include TasksHelper
 
+	before_action :authenticate_user!, except: [:index]
+	before_action :new_task, only: [:index, :create]
+	
 	respond_to :html, :js
 	
 	def new
@@ -9,7 +12,7 @@ class ProjectsController < ApplicationController
 	end
 	
 	def create
-		@project = Project.create(project_params)
+		@project = current_user.projects.build(project_params)
 
   	if @project.save
       flash.now[:info] = "Project created!"
@@ -43,9 +46,5 @@ private
 	def project_params
 		params.require(:project).permit(:name)
 	end
-
-	def new_task
-		@task = Task.new(project_id: params[:project_id])
-	end	
 
 end

@@ -1,0 +1,9 @@
+<ul class="nav nav-pills pull-right">
+  <li role="presentation">
+    <%= button_to "Register", new_user_registration_path, class: "btn btn-primary", data: { toggle: "modal", target: "#ajax-modal" }, method: :get, remote: true %>
+  </li>
+  <li class="divider-vertical"></li>
+  <li role="presentation">
+    <%= button_to "Log In", new_user_session_path, class: "btn btn-primary", data: { toggle: "modal", target: "#ajax-modal" }, method: :get, remote: true %>
+  </li>
+</ul>

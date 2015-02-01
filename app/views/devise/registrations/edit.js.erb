@@ -1,0 +1,25 @@
+var title       =   '.modal-title',
+    loader      =   '.ajax-loader',
+    content     =   '.modal-body-content',
+    dataRemote  =   'a[data-remote=true]',
+    toolbar     =   'div.modal-footer',
+    modal       =   '#ajax-modal';
+
+
+//i set the title through a helper function
+$(title).html("Edit <%= resource_name.to_s.humanize %>");
+//hides the modal and shows the ajax content
+$(loader).fadeToggle('fast', function() {
+  $(loader).fadeOut('slow');
+  $(content).html('<%= j( render "edit" ) %>');
+  $(toolbar).addClass('hide');
+  $(modal).modal('show');
+
+});
+
+//brings the loader back up + gets rid of the content when linking to another controller method etc
+  $(content).on('click', 'a[data-remote=true]', function(){
+    $(content).fadeOut('slow', function() {
+      $('.ajax-loader').fadeIn('slow');
+    });
+  });

@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 	
+	before_action :authenticate_user!
+
 	respond_to :html, :js
 
 	def edit
@@ -7,7 +9,7 @@ class TasksController < ApplicationController
 	end
 
 	def create
-		@task = Task.create(task_params)
+		@task = current_user.tasks.build(task_params)
 		if @task.save
 			flash.now[:success] = "Task is created!"
   	end
@@ -49,7 +51,7 @@ class TasksController < ApplicationController
 	private 
 
 		def task_params
-			params.require(:task).permit(:name, :deadline, :project_id)
+			params.require(:task).permit(:name, :deadline, :project_id, :user_id)
 		end
 
 

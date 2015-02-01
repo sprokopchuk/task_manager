@@ -1,0 +1,12 @@
+<% if resource.errors.any?  %>
+	$("<%= j(devise_error_messages!) %>").insertBefore(".modal-body-content").fadeOut(3000, function(){
+		$(this).remove();
+	});
+<% else %>
+	$("#ajax-modal").modal().fadeOut();
+	<% flash.each do |message_type, message| %>
+		$("<div class=\"alert alert-<%= message_type %>\"><%= message %></div>").insertBefore(".dropdown").fadeOut(3000, function(){
+			$(this).remove();
+		});
+	<% end %>
+<% end %>

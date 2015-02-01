@@ -20,3 +20,35 @@
 //= require turbolinks
 //= require_tree .
 
+$(document).ready(function(){
+	// this sets up the ajax loader, and it will stay until the method specific js removes it
+	$('a[data-target=#ajax-modal]').on('click', function(e){
+   e.preventDefault();
+   e.stopPropagation();
+   //$('body').modalmanager('loading');
+   $.rails.handleRemote( $(this) );
+ });
+	//removes whatever is in the modal body content div upon clicking close/outside modal
+	$(document).on('click', '[data-dismiss=modal], .modal-scrollable', function(){
+	  $('.modal-title').empty();
+	  $('.modal-body-content').empty();
+	  $('.modal-footer').empty();
+	});
+	
+	$('#ajax-modal').on('click', 'a[data-remote=true]', function(){
+		var shown = $("#ajax-modal").is(":visible");
+		if(!shown){
+		  $('.modal-title').empty();
+		  $('.modal-body-content').empty();
+		  $('.modal-footer').empty();
+		}
+	});
+
+	$(document).on('click', '#ajax-modal', function(e){
+	  e.stopPropagation();
+	});
+
+
+
+});
+

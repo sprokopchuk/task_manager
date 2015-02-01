@@ -1,0 +1,19 @@
+<div class="dropdown">
+	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+  	<span class="glyphicon glyphicon-user"></span>&nbsp;<%= current_user.email %>
+    <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation">
+        	<%= link_to edit_user_registration_path, data: { toggle: "modal", target: "#ajax-modal" }, role: "menuitem", tabindex: "-1", method: :get, remote: true do %>
+        		<span class="glyphicon glyphicon-wrench"></span>&nbsp;Settings
+        	<% end %>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+        	<%= link_to destroy_user_session_path, role: "menuitem", tabindex: "-1", method: :delete, remote: true do %>
+            <span class="glyphicon glyphicon-share"></span>&nbsp;Log out
+        	<% end %>
+        </li>
+    </ul>
+</div>
