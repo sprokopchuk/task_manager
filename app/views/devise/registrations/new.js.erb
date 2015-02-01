@@ -10,16 +10,9 @@ var title       =   '.modal-title',
 $(title).html('Sign Up');
 //hides the modal and shows the ajax content
 $(loader).fadeToggle('fast', function() {
-  $(loader).fadeOut('slow');
+  $(loader).fadeOut('fast');
   $(content).html('<%= j( render "new" ) %>');
   $(toolbar).html('<%= j(render "devise/shared/links" ) %>');
   $(modal).modal();
 
 });
-
-//brings the loader back up + gets rid of the content when linking to another controller method etc
-  $(content).on('click', 'a[data-remote=true]', function(){
-    $(content).fadeOut('slow', function() {
-      $('.ajax-loader').fadeIn('slow');
-    });
-  });

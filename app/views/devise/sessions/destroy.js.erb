@@ -3,7 +3,7 @@
 		$(this).remove();
 	});
 <% end %>
-$("<%= j(render 'shared/nav_for_not_users') %><div class=\"clear\"></div>").insertBefore(".dropdown");
+$("<%= j(render 'shared/nav_for_not_users') %>").insertBefore(".dropdown");
 $('.modal-footer').removeClass('hide');
 $(".dropdown").remove();
 $(".panel").remove();

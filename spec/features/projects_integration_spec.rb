@@ -1,11 +1,23 @@
 require 'rails_helper'
 require 'helpers/wait_for_ajax_helper'
-require 'helpers/projects_helper_spec.rb'
+require 'helpers/projects_helper.rb'
+include Warden::Test::Helpers
+
 feature 'Project management', js: true do 
-	
+
+
+	scenario "adds a new project without sign in" do
+		visit root_path
+		click_button 'Add TODO List'		
+		wait_for_ajax
+		expect(page).to have_content("You need to sign in or sign up before continuing.")
+	end
+
 	feature "adds a new project" do
 
-		before do 
+		background do 
+			@user = FactoryGirl.create(:user)
+			login_as @user, :scope => :user
 			visit root_path
 			click_button 'Add TODO List'
 			wait_for_ajax
@@ -41,7 +53,10 @@ feature 'Project management', js: true do
 	feature "edit the project" do
 		
 		background do
-			@project = FactoryGirl.create(:project)
+			@user = FactoryGirl.create(:user)
+			@project = FactoryGirl.create(:project, :user_id => @user.id)
+			login_as @user, :scope => :user
+			visit root_path
 		end
 
 		scenario "when form for editing show project must be hidden" do 
@@ -77,7 +92,7 @@ feature 'Project management', js: true do
 		end
 
 		scenario "when created two projects" do
-			@other_project = FactoryGirl.create(:project, :name => "This is my second project")
+			@other_project = FactoryGirl.create(:project, :name => "This is my second project", :user_id => @user.id)
 			visit root_path
 			get_edit_form_for_project(@project)
 			get_edit_form_for_project(@other_project)
@@ -92,7 +107,9 @@ feature 'Project management', js: true do
 	feature "delete the project" do
 		
 		background do 
-			@project = FactoryGirl.create(:project)
+			@user = FactoryGirl.create(:user)
+			@project = FactoryGirl.create(:project, :user_id => @user.id)
+			login_as @user, :scope => :user
 			visit root_path
 		end	
 

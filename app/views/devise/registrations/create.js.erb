@@ -3,7 +3,7 @@
 		$(this).remove();
 	});
 <% else %>
-	$("#ajax-modal").modal().fadeOut();
+	$("#ajax-modal").modal('hide');
 	$("<%= j(render 'shared/nav_for_users') %>").insertBefore(".nav");
 	$(".nav").remove();
 	<% flash.each do |message_type, message| %>

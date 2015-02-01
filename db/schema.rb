@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150127172715) do
   create_table "tasks", force: true do |t|
     t.string   "name"
     t.integer  "project_id"
-    t.date     "deadline"
+    t.datetime "deadline"
     t.integer  "priority",   default: 1
     t.boolean  "done",       default: false
     t.datetime "created_at"
