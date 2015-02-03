@@ -48,7 +48,19 @@ $(document).ready(function(){
 	  e.stopPropagation();
 	});
 
+	$(document).on('click', function(event) {
+	  var edit = $(".glyphicon-pencil");
+	  if(!edit.is(event.target) && !$(event.target).closest('.panel-heading').length){
+			$(".panel-heading > form").remove();
+			$(".panel-heading").find(".hide").replaceWith($(".panel-heading > .hide").html());
+	  } 
 
+	  if(!edit.is(event.target) && !$(event.target).closest('.list-group-item').length){
+			$(".list-group-item > form").remove();
+			$(".list-group-item > div").removeClass("hide")
+	  } 
+
+	});
 
 });
 

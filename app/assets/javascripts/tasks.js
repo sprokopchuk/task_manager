@@ -1,5 +1,11 @@
 $(document).ready(function(){
-	
+		initialize_tasks();
+	$("#ajax-modal").bind("ajax:success", 'input[value="Log in"]', function(){
+		initialize_tasks();
+	});
+});
+
+function initialize_tasks(){
 
 	$("form[id^=for_project_id]").each(function(){
 		
@@ -75,6 +81,4 @@ $(document).ready(function(){
 			data: {"priority": this.value},
 		});
 	});
-
-
-});
+}

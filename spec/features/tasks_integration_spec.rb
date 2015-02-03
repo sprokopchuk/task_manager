@@ -1,10 +1,14 @@
 require 'rails_helper'
 require 'helpers/wait_for_ajax_helper'
-require 'helpers/tasks_helper_spec.rb'
+require 'helpers/tasks_helper.rb'
+include Warden::Test::Helpers
+
 feature 'Task management', js: true do 
 		
 	background do 
-		@project = FactoryGirl.create(:project)
+		@user = FactoryGirl.create(:user)
+		@project = FactoryGirl.create(:project, :user_id => @user.id)
+		login_as @user, :scope => :user
 	end
 
 	feature "adds a new task" do
@@ -64,7 +68,7 @@ feature 'Task management', js: true do
   	end
 
   	scenario "when to hover task and show for actions: edit, delete and prioritise" do
-  		@task = FactoryGirl.create(:task, :project_id => @project.id)
+  		@task = FactoryGirl.create(:task, :project_id => @project.id, :user_id => @user.id)
 			visit root_path
 			expect(page.find("div[data-task_id=\"#{@task.id}\"] div.action-button", visible: false).visible?).to be_falsey 
 			page.find("div[data-task_id=\"#{@task.id}\"]").hover
@@ -76,8 +80,8 @@ feature 'Task management', js: true do
 	feature "edit the task" do
 
 		background do
-			@task = FactoryGirl.create(:task, :project_id => @project.id)
-		end
+			@task = FactoryGirl.create(:task, :project_id => @project.id, :user_id => @user.id)
+   	end
 
 		scenario "when form for editing show task must be hidden" do
 			visit root_path
@@ -133,7 +137,7 @@ feature 'Task management', js: true do
 		end
 	
 		scenario "when created two tasks" do
-			@other_task = FactoryGirl.create(:task, :name => "The second task", :project_id => @project.id)
+			@other_task = FactoryGirl.create(:task, :name => "The second task", :project_id => @project.id, :user_id => @user.id)
 			visit root_path
 			get_edit_form_for_task(@task)
 			get_edit_form_for_task(@other_task)
@@ -146,7 +150,7 @@ feature 'Task management', js: true do
 	feature "delete the task" do
 
 		background do
-			@task = FactoryGirl.create(:task, :project_id => @project.id)
+			@task = FactoryGirl.create(:task, :project_id => @project.id, :user_id => @user.id)
 			visit root_path
 		end
 
@@ -169,7 +173,7 @@ feature 'Task management', js: true do
 	feature "prioritise the task" do
 
 		background do
-			@task = FactoryGirl.create(:task, :project_id => @project.id, :priority => 2)
+			@task = FactoryGirl.create(:task, :project_id => @project.id, :priority => 2, :user_id => @user.id)
 		end
 
 		scenario "up" do
@@ -231,7 +235,7 @@ feature 'Task management', js: true do
 	feature "mark the task as done" do
 		
 		background do
-			@task = FactoryGirl.create(:task, :project_id => @project.id)
+			@task = FactoryGirl.create(:task, :project_id => @project.id, :user_id => @user.id)
 		end
 
 		scenario "when task isn't done" do

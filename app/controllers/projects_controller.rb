@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
 
 	include TasksHelper
+	include ApplicationHelper
 
 	before_action :authenticate_user!, except: [:index]
 	before_action :new_task, only: [:index, :create]
-	
+	before_action :set_csrf_headers, only: :edit
+
 	respond_to :html, :js
 	
 	def new
