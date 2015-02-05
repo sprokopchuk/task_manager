@@ -1,4 +1,4 @@
- <div class="nav navbar-nav">
+ <div class="navbar-nav">
 	<%- if controller_name != 'sessions' %>
 	  <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-primary", data: { target: "#ajax-modal" }, method: :get, remote: true %>
 	<% end -%>

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Project, :type => :model do
 
 	before do
-		@project = Project.new(name: "For home")
+		@project = Project.new(name: "For home", user_id: 1)
 	end
 
 	it "is valid with name" do
@@ -24,7 +24,7 @@ describe Project, :type => :model do
 
 	it "is valid when assosiated tasks destroyed with project" do
 		@project.save
-		@project.tasks.create!(name: "buy a milk")
+		@project.tasks.create!(name: "buy a milk", user_id: 1)
 		expect{@project.destroy}.to change{Task.count}.by(-1)	
 	end
 	

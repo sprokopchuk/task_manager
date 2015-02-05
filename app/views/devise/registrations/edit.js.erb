@@ -12,7 +12,7 @@ $(title).html("Edit <%= resource_name.to_s.humanize %>");
 $(loader).fadeToggle('fast', function() {
   $(loader).fadeOut('fast');
   $(content).html('<%= j( render "edit" ) %>');
-  //$(toolbar).addClass('hide');
+  $(toolbar).addClass('hide');
   $(modal).modal();
 
 });

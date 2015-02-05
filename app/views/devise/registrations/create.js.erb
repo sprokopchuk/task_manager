@@ -5,10 +5,10 @@
 <% else %>
 	$("#ajax-modal").modal('hide');
 	$("<%= j(render 'shared/nav_for_users') %>").insertBefore(".nav");
-	$(".nav").remove();
 	<% flash.each do |message_type, message| %>
 		$("<div class=\"alert alert-<%= message_type %>\"><%= message %></div>").insertBefore(".nav").fadeOut(3000, function(){
 			$(this).remove();
 		});
 	<% end %>
+	$(".nav").remove();
 <% end %>

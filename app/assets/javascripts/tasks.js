@@ -1,8 +1,5 @@
 $(document).ready(function(){
 		initialize_tasks();
-	$("#ajax-modal").bind("ajax:success", 'input[value="Log in"]', function(){
-		initialize_tasks();
-	});
 });
 
 function initialize_tasks(){

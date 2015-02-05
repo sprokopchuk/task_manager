@@ -5,7 +5,6 @@ include Warden::Test::Helpers
 
 feature 'Project management', js: true do 
 
-
 	scenario "adds a new project without sign in" do
 		visit root_path
 		click_button 'Add TODO List'		

@@ -5,7 +5,7 @@
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation">
-        	<%= link_to edit_user_registration_path, data: { toggle: "modal", target: "#ajax-modal" }, role: "menuitem", tabindex: "-1", method: :get, remote: true do %>
+        	<%= link_to edit_user_registration_path, data: { target: "#ajax-modal" }, role: "menuitem", tabindex: "-1", method: :get, remote: true do %>
         		<span class="glyphicon glyphicon-wrench"></span>&nbsp;Settings
         	<% end %>
         </li>

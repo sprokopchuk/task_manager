@@ -17,4 +17,5 @@ var msg;
 	$("<%= j(render 'shared/project_tasks', :project => @project) %>").insertBefore(parent);
 	$(".add-lists #new_project").remove();
 	$(".add-lists form").show();
+	initialize_tasks();
 <% end %>

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Task, :type => :model do
 
 	before do
-		@task = Task.new(name: "buy a milk", project_id: 2)
+		@task = Task.new(name: "buy a milk", project_id: 2, user_id: 1)
 	end
 
 	it "is valid with name" do

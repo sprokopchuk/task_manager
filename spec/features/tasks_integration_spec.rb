@@ -92,7 +92,9 @@ feature 'Task management', js: true do
 		scenario "with a blank name" do
 			visit root_path
 			get_edit_form_for_task(@task)
-			fill_in "task_name", with: ""
+			within "#edit_task_#{@task.id}" do
+				fill_in "task[name]", with: ""
+			end
 			click_button "Update Task"
 			expect(page).to have_content("This field is required.")
 		end
@@ -100,7 +102,9 @@ feature 'Task management', js: true do
 		scenario "with a too short name" do
 			visit root_path
 			get_edit_form_for_task(@task)
-			fill_in "task_name", with: "a"*3
+			within "#edit_task_#{@task.id}" do			
+				fill_in "task[name]", with: "a"*3
+			end
 			click_button "Update Task"
 			expect(page).to have_content("Please enter at least 4 characters")
 		end
@@ -108,8 +112,10 @@ feature 'Task management', js: true do
 		scenario "with invalid date" do
 			visit root_path
 			get_edit_form_for_task(@task)
-			fill_in "task_name", 		 with: "Buy some water"
-			fill_in "task_deadline", with: "a"*5
+			within "#edit_task_#{@task.id}" do			
+				fill_in "task[name]", 		 with: "Buy some water"
+				fill_in "task[deadline]", with: "a"*5
+			end
 			click_button "Update Task"
 			expect(page).to have_content("Please enter a valid date")
 		end
@@ -117,7 +123,9 @@ feature 'Task management', js: true do
 		scenario "with valid name and without deadline" do
 			visit root_path
 			get_edit_form_for_task(@task)
-			fill_in "task_name", 		 with: "Buy some water"
+			within "#edit_task_#{@task.id}" do
+				fill_in "task[name]", 		 with: "Buy some water"
+			end
 			click_button "Update Task"
 			wait_for_ajax
 			expect(page).to have_content("Buy some water")
@@ -127,8 +135,10 @@ feature 'Task management', js: true do
 		scenario "with valid name and deadline" do #must be solve the problem with te date format %d/%m/%Y
 			visit root_path
 			get_edit_form_for_task(@task)
-  		fill_in "task_name", 		with: "Buy Birthday Flowers for Mom"
-  		fill_in "task_deadline", with: "2015-05-25"
+ 			within "#edit_task_#{@task.id}" do
+  			fill_in "task[name]", 		with: "Buy Birthday Flowers for Mom"
+  			fill_in "task[deadline]", with: "2015-05-25"
+  		end
   		click_button "Update Task"
   		wait_for_ajax
 			expect(page).to have_content("Task is updated!")
