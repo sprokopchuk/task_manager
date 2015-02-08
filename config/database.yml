@@ -57,4 +57,4 @@ production:
   database: task_manager_production
   pool: 5
   username: task_manager
-  password: 
+  password: task_manager
