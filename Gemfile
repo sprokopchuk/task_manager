@@ -19,6 +19,9 @@ gem 'coffee-rails', '~> 4.0.0'
 
 #Authentication system
 gem 'devise'
+
+gem 'rails_12factor', group: :production
+
 # Validation date
 gem 'jc-validates_timeliness'
 #gem 'client_side_validations' //Conflict with ruby on rails: Wrong number of arguments in form_for
