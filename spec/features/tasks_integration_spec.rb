@@ -32,14 +32,6 @@ feature 'Task management', js: true do
   		expect(page).to have_content("Please enter at least 4 characters.")
   	end
 
-  	scenario "with a invalid deadline" do
-			visit root_path
-  		fill_in "task[name]" ,		with: "Buy a milk"
-  		fill_in "task[deadline]", with: "a"*5
-  		expect{click_button "Add Task"}.not_to change{Task.count}
-  		expect(page).to have_content("Please enter a valid date.")
-  	end
-
   	scenario "with valid name and without deadline" do
 			visit root_path
   		fill_in "task[name]", with: "Buy a milk"
@@ -49,30 +41,30 @@ feature 'Task management', js: true do
   			}.to change{Task.count}.by(1)
   			expect(page).to have_content("Task is created!")
   			expect(page).to have_content("Buy a milk")
-  			expect(page.find('div[title="Normal priority"]').text).to eq("1")
+  			expect(find('div[title="Normal priority"]').text).to eq("1")
   			expect(page.has_css?('div[title="Deadline"]')).to be_falsey
   	end
 
   	scenario "with valid name and deadline" do
 			visit root_path
   		fill_in "task[name]", 		with: "Buy a dog"
-  		fill_in "task[deadline]", with: "2015-12-30"
+  		find("input[name*=deadline]").click
   		expect{
   			click_button "Add Task"
   			wait_for_ajax
   			}.to change{Task.count}.by(1)
   			expect(page).to have_content("Task is created!")
   			expect(page).to have_content("Buy a dog")
-  			expect(page.find('div[title="Normal priority"]').text).to eq("1")
-  			expect(page.find('span[title="Deadline"]').text).to eq("30-12-2015")			
+  			expect(find('div[title="Normal priority"]').text).to eq("1")
+  			expect(find('span[title="Deadline"]').text).to eq(Date.today.strftime("%d-%m-%Y"))			
   	end
 
   	scenario "when to hover task and show for actions: edit, delete and prioritise" do
   		@task = FactoryGirl.create(:task, :project_id => @project.id, :user_id => @user.id)
 			visit root_path
-			expect(page.find("div[data-task_id=\"#{@task.id}\"] div.action-button", visible: false).visible?).to be_falsey 
-			page.find("div[data-task_id=\"#{@task.id}\"]").hover
-			expect(page.find("div[data-task_id=\"#{@task.id}\"] div.action-button").visible?).to be_truthy 
+			expect(find("div[data-task_id=\"#{@task.id}\"] div.action-button", visible: false).visible?).to be_falsey 
+			find("div[data-task_id=\"#{@task.id}\"]").hover
+			expect(find("div[data-task_id=\"#{@task.id}\"] div.action-button").visible?).to be_truthy 
   	end
 
 	end
@@ -86,7 +78,7 @@ feature 'Task management', js: true do
 		scenario "when form for editing show task must be hidden" do
 			visit root_path
 			get_edit_form_for_task(@task)
-			expect(page.find("div[data-task_id=\"#{@task.id}\"]", visible: false).visible?).to be_falsey 
+			expect(find("div[data-task_id=\"#{@task.id}\"]", visible: false).visible?).to be_falsey 
 		end
 
 		scenario "with a blank name" do
@@ -109,17 +101,6 @@ feature 'Task management', js: true do
 			expect(page).to have_content("Please enter at least 4 characters")
 		end
 
-		scenario "with invalid date" do
-			visit root_path
-			get_edit_form_for_task(@task)
-			within "#edit_task_#{@task.id}" do			
-				fill_in "task[name]", 		 with: "Buy some water"
-				fill_in "task[deadline]", with: "a"*5
-			end
-			click_button "Update Task"
-			expect(page).to have_content("Please enter a valid date")
-		end
-
 		scenario "with valid name and without deadline" do
 			visit root_path
 			get_edit_form_for_task(@task)
@@ -132,18 +113,18 @@ feature 'Task management', js: true do
 			expect(page).to have_content("Task is updated!")
 		end
 
-		scenario "with valid name and deadline" do #must be solve the problem with te date format %d/%m/%Y
+		scenario "with valid name and deadline" do 
 			visit root_path
 			get_edit_form_for_task(@task)
  			within "#edit_task_#{@task.id}" do
   			fill_in "task[name]", 		with: "Buy Birthday Flowers for Mom"
-  			fill_in "task[deadline]", with: "2015-05-25"
+  			find("input[name*=deadline]").click
   		end
   		click_button "Update Task"
   		wait_for_ajax
 			expect(page).to have_content("Task is updated!")
   		expect(page).to have_content("Buy Birthday Flowers for Mom")
-  		expect(page.find('span[title="Deadline"]').text).to eq("25-05-2015")			
+  		expect(find('span[title="Deadline"]').text).to eq(Date.today.strftime("%d-%m-%Y"))			
 		end
 	
 		scenario "when created two tasks" do
@@ -166,7 +147,7 @@ feature 'Task management', js: true do
 
 		scenario "with pop-up alert" do
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			div_task.hover
 			div_task.find("a[href=\"/tasks/#{@task.id}\"]").click	
 			a = page.driver.browser.switch_to.alert
@@ -189,7 +170,7 @@ feature 'Task management', js: true do
 		scenario "up" do
 			visit root_path
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			div_task.hover
 			expect{
 				div_task.find("button[value=\"up\"]").click
@@ -202,7 +183,7 @@ feature 'Task management', js: true do
 		scenario "down" do
 			visit root_path
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			div_task.hover
 			expect{
 				div_task.find("button[value=\"down\"]").click
@@ -217,7 +198,7 @@ feature 'Task management', js: true do
 			@task.reload
 			visit root_path
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			div_task.hover
 			expect{
 				div_task.find("button[value=\"down\"]").click
@@ -231,7 +212,7 @@ feature 'Task management', js: true do
 			@task.reload
 			visit root_path
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			div_task.hover
 			expect{
 				div_task.find("button[value=\"up\"]").click
@@ -252,7 +233,7 @@ feature 'Task management', js: true do
 			@task.update_attributes(:done => true)
 			visit root_path
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			expect(div_task.find('input[type="checkbox"]').checked?).to be_truthy
 			expect{
 				div_task.find('input[type="checkbox"]').click
@@ -266,7 +247,7 @@ feature 'Task management', js: true do
 		scenario "when task is done" do
 			visit root_path
 			expect(page).to have_content(@task.name)
-			div_task = page.find("div[data-task_id=\"#{@task.id}\"]")
+			div_task = find("div[data-task_id=\"#{@task.id}\"]")
 			expect(div_task.find('input[type="checkbox"]').checked?).to be_falsey
 			expect{
 				div_task.find('input[type="checkbox"]').click

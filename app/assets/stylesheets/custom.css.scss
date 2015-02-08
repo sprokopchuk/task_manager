@@ -42,7 +42,7 @@ h1 {
 .list-group { margin-bottom:0px; }
 .form-inline {margin: 10px;}
 .form-inline .form-group { width: 100%; }
-.form-inline .form-control { width: 50%;}
+.form-inline .form-control { width: 40%;}
 .list-group-item {padding-left: 30px;}
 .dropdown{
 	float: right;
@@ -73,7 +73,7 @@ h1 {
 .panel-heading .form-inline .form-control { width: 75%;}
 
 .form-inline input[name*=deadline] {
-	width: 25%;
+	width: 35%;
 }
 
 #error_explanation {
@@ -160,5 +160,6 @@ h1 {
 
 .form-control[readonly]{
   cursor: pointer !important;
+  background-color: white !important;
 }
 

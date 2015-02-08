@@ -3,7 +3,7 @@
 	  <span class="glyphicon glyphicon-plus"></span>
 	  <%= f.text_field  :name, class: "form-control",  placeholder: "Start typing here to create a task" %>
 	  <% deadline_value = @task.deadline unless @task.deadline.blank? %>
-	  <%= f.text_field  :deadline, value: "#{deadline_value}", class: "form-control", placeholder: "Deadline for task" %>
+	  <%= f.text_field  :deadline, value: "#{deadline_value}", class: "form-control", placeholder: "Deadline for task", readonly: true %>
 	  <%= f.submit "Update Task",  class: "btn btn-success" %>
   </div>
 <% end %>

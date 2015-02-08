@@ -2,7 +2,7 @@
  <div class="form-group">
 	  <span class="glyphicon glyphicon-plus"></span>
 	  <%= f.text_field  :name, class: "form-control", id: "task_name_project_id_#{project_id}", 'data-behaviour' => 'datepicker', placeholder: "Start typing here to create a task" %>
-	  <%= f.text_field  :deadline, class: "form-control", id: "task_deadline_project_id_#{project_id}", placeholder: "Deadline: Year-Month-Day" %>
+	  <%= f.text_field  :deadline, class: "form-control", id: "task_deadline_project_id_#{project_id}", placeholder: "Deadline: Year-Month-Day", readonly: true %>
 	  <%= f.hidden_field :project_id, value: project_id, id: "task_project_id_#{project_id}" %>
 	  <%= f.submit "Add Task",  class: "btn btn-success" %>
   </div>
