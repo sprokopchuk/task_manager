@@ -1,15 +1,16 @@
-== Task manager
+## Task manager
 
-home :: https://github.com/sprokopchuk/task_manager
-heroku ::  https://taskmanager2109.herokuapp.com
-author :: Sergey Prokopchuk
+###Home
+[https://github.com/sprokopchuk/task_manager](https://github.com/sprokopchuk/task_manager)
+###Heroku
+[https://taskmanager2109.herokuapp.com](https://taskmanager2109.herokuapp.com)
 
-== Description
+## Description
 
 I'm a person who passionate about own productivity. I want to manage my tasks and projects 
 more effectively. I need simple tool that support me in controlling my task­flow. 
 
-== Functional requirements
+## Functional requirements
 
 * I able to create/update/delete projects 
 * I able to add tasks to my project 
@@ -18,7 +19,7 @@ more effectively. I need simple tool that support me in controlling my task­flo
 * I able to choose deadline for my task 
 * I able to mark a task as 'done' 
 
-== Technical requirements
+## Technical requirements
 
 * It is WEB application 
 * For the client side used: HTML, CSS (Twitter Bootstrap), JavaScript (jQuery) 
@@ -28,7 +29,7 @@ more effectively. I need simple tool that support me in controlling my task­flo
  
  ![ScreenShot](https://raw.github.com/sprokopchuk/task_manager/master/screenshot.png)
 
-== Additional functionality
+## Additional functionality
 
 * It work like one page WEB application and use AJAX technology, load 
 and submit data without reloading a page. 
