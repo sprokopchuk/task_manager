@@ -11,12 +11,12 @@ more effectively. I need simple tool that support me in controlling my task­flo
 
 == Functional requirements
 
-I able to create/update/delete projects 
-I able to add tasks to my project 
-I able to update/delete tasks 
-I able to prioritise tasks into a project (Priorities: Normal, High, Maximum) 
-I able to choose deadline for my task 
-I able to mark a task as 'done' 
+* I able to create/update/delete projects 
+* I able to add tasks to my project 
+* I able to update/delete tasks 
+* I able to prioritise tasks into a project (Priorities: Normal, High, Maximum) 
+* I able to choose deadline for my task 
+* I able to mark a task as 'done' 
 
 == Technical requirements
 
